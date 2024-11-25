@@ -1,5 +1,8 @@
 {
+    "parser": "@typescript-eslint/parser",
     "plugins": ["prettier", "import", "@typescript-eslint"],
+    // "ignores": [".config/*"],
+    // "ignores": ["**/.config/"],
     "extends": [
         "plugin:prettier/recommended",
         "prettier",
@@ -15,13 +18,10 @@
         "browser": true,
         "node": true
     },
-    "languageOptions": {
-        "parser": "@typescript-eslint/parser"
-    },
     "rules": {
         "no-debugger": "off",
         "no-console": 0,
         "class-methods-use-this": "off",
-        "@typescript-eslint/no-explicit-any": 2
+        "@typescript-eslint/no-explicit-any": "error"
     }
 }
