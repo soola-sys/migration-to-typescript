@@ -3,6 +3,11 @@ interface Sources {
     name: string;
 }
 
+enum responseStatuses {
+    Ok = 'ok',
+    Error = 'error',
+}
+
 export interface INewsArticles {
     source: Sources;
     author: string | null;
@@ -12,6 +17,16 @@ export interface INewsArticles {
     urlToImage: string | null;
     publishedAt: string;
     content: string;
+}
+
+export interface INewsArticleResponse {
+    status: responseStatuses;
+    totalResults: number;
+    articles: INewsArticles[];
+}
+export interface INewsSourcesResponse {
+    status: responseStatuses;
+    sources: INewsSources[];
 }
 export interface INewsSources {
     id: string;
@@ -29,7 +44,7 @@ export function assertIsDefined<T>(value: T): asserts value is NonNullable<T> {
     }
 }
 
-export function processDesc<Type>(value: Type | null): Type {
+export function checkForNull<Type>(value: Type | null): Type {
     if (value === null) {
         throw new Error(`error ${value}`);
     } else {
