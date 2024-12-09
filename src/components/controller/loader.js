@@ -1,4 +1,8 @@
+// import { generalResponseType, IApiKey, IOptions, someCallback } from '../../types/index';
+
 class Loader {
+    // private baseLink;
+    // private options;
     constructor(baseLink, options) {
         this.baseLink = baseLink;
         this.options = options;
@@ -25,6 +29,7 @@ class Loader {
 
     makeUrl(options, endpoint) {
         const urlOptions = { ...this.options, ...options };
+        console.log('UrlOptions', urlOptions);
         let url = `${this.baseLink}${endpoint}?`;
 
         Object.keys(urlOptions).forEach((key) => {
