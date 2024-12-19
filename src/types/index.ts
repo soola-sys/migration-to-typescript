@@ -3,9 +3,35 @@ interface Sources {
     name: string;
 }
 
+export interface IEnvOptions {
+    apiKey?: string;
+}
+
+export function getEnv(input: string | undefined): string {
+    if (input == undefined) {
+        throw new Error(`${input} is undefined`);
+    } else {
+        return input;
+    }
+}
+
+export interface IOptions {
+    sources?: string;
+}
+
+export interface IEndpoints {
+    endpoint: EnpointTypes;
+}
+export type Callback<T> = (data: T) => void;
+
 enum responseStatuses {
     Ok = 'ok',
     Error = 'error',
+}
+
+enum EnpointTypes {
+    Everything = 'everything',
+    Sources = 'sources',
 }
 
 export interface INewsArticles {
