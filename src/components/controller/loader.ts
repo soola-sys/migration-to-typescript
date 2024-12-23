@@ -1,5 +1,6 @@
-import { IEnvOptions, IEndpoints, IOptions, Callback } from '../../types/index';
+import { IEnvOptions, IOptions, Callback } from '../../types/index';
 import { INewsArticleResponse, INewsSourcesResponse } from '../../types/index';
+
 class Loader {
     private baseLink;
     private options;
@@ -8,11 +9,11 @@ class Loader {
         this.options = options;
     }
     getResp(
-        { endpoint, options = {} }: { endpoint: IEndpoints; options: IOptions },
-        callback: Callback<INewsArticleResponse | INewsSourcesResponse> = () => {
+        { endpoint, options = {} }: { endpoint: string; options?: IOptions },
+        callback: Callback<INewsSourcesResponse | INewsArticleResponse> = () => {
             console.error('No callback for GET response');
         }
-    ) {
+    ): void {
         this.load('GET', endpoint, callback, options);
     }
     errorHandler(res: Response): Response {
@@ -25,11 +26,10 @@ class Loader {
         return res;
     }
 
-    makeUrl(options: IOptions = {}, endpoint: IEndpoints): string {
+    makeUrl(options: IOptions = {}, endpoint: string): string {
         const urlOptions: Record<string, unknown> = { ...this.options, ...options };
         console.log('UrlOptions', urlOptions);
         let url: string = `${this.baseLink}${endpoint}?`;
-
         Object.keys(urlOptions).forEach((key) => {
             url += `${key}=${urlOptions[key]}&`;
         });
@@ -39,14 +39,17 @@ class Loader {
 
     load(
         method: 'GET' | 'POST',
-        endpoint: IEndpoints,
+        endpoint: string,
         callback: Callback<INewsArticleResponse | INewsSourcesResponse>,
         options: IOptions = {}
     ) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
-            .then((res) => res.json())
-            .then((data) => callback(data))
+            .then((res: Response) => res.json())
+            .then((data) => {
+                console.log('FETCH INSIDE LOAD: ', data, typeof data);
+                callback(data);
+            })
             .catch((err: Error) => console.error(err));
     }
 }

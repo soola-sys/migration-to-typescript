@@ -2,6 +2,9 @@ interface Sources {
     id: null | string;
     name: string;
 }
+export type IArticleOrSources<T extends INewsArticles[]> = T extends INewsArticles
+    ? INewsArticleResponse
+    : INewsSourcesResponse;
 
 export interface IEnvOptions {
     apiKey?: string;
@@ -16,23 +19,20 @@ export function getEnv(input: string | undefined): string {
 }
 
 export interface IOptions {
-    sources?: string;
+    sources?: string | null;
 }
 
-export interface IEndpoints {
-    endpoint: EnpointTypes;
-}
 export type Callback<T> = (data: T) => void;
 
-enum responseStatuses {
+export enum responseStatuses {
     Ok = 'ok',
     Error = 'error',
 }
 
-enum EnpointTypes {
-    Everything = 'everything',
-    Sources = 'sources',
-}
+// export enum EnpointTypes {
+//     Everything = 'everything',
+//     Sources = 'sources',
+// }
 
 export interface INewsArticles {
     source: Sources;
@@ -47,12 +47,12 @@ export interface INewsArticles {
 
 export interface INewsArticleResponse {
     status: responseStatuses;
-    totalResults: number;
-    articles: INewsArticles[];
+    totalResults?: number;
+    articles?: INewsArticles[];
 }
 export interface INewsSourcesResponse {
     status: responseStatuses;
-    sources: INewsSources[];
+    sources?: INewsSources[];
 }
 export interface INewsSources {
     id: string;
@@ -64,8 +64,8 @@ export interface INewsSources {
     country: string;
 }
 
-export function assertIsDefined<T>(value: T): asserts value is NonNullable<T> {
-    if (!(value instanceof HTMLDivElement)) {
+export function assertIsDefined(value: EventTarget | null): asserts value is HTMLElement {
+    if (!(value instanceof HTMLElement)) {
         throw new Error('error');
     }
 }
