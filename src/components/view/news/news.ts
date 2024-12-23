@@ -22,7 +22,6 @@ class News {
             const newsMetaAuthor: HTMLLIElement | null = newsClone.querySelector('.news__meta-author');
             const newsMetaDate: HTMLLIElement | null = newsClone.querySelector('.news__meta-date');
             const newsDescTitle: HTMLHeadingElement | null = newsClone.querySelector('.news__description-title');
-            // const newsDescSource: HTMLHeadingElement | null = newsClone.querySelector('.news__description-source');
             const newsDescContent: HTMLParagraphElement | null = newsClone.querySelector('.news__description-content');
             const newsReadMore: HTMLParagraphElement | null = newsClone.querySelector('.news__read-more a');
             if (idx % 2) checkForNull(newsItem).classList.add('alt');

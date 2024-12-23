@@ -47,7 +47,6 @@ class Loader {
             .then(this.errorHandler)
             .then((res: Response) => res.json())
             .then((data) => {
-                console.log('FETCH INSIDE LOAD: ', data, typeof data);
                 callback(data);
             })
             .catch((err: Error) => console.error(err));
