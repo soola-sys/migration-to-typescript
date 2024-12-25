@@ -1,5 +1,6 @@
 import { INewsArticles } from '../../../types/index';
 import { checkForNull } from '../../../types/index';
+import * as myImage from '../../view/img/news_placeholder.jpg';
 import './news.css';
 
 class News {
@@ -23,10 +24,10 @@ class News {
             const newsMetaDate: HTMLLIElement | null = newsClone.querySelector('.news__meta-date');
             const newsDescTitle: HTMLHeadingElement | null = newsClone.querySelector('.news__description-title');
             const newsDescContent: HTMLParagraphElement | null = newsClone.querySelector('.news__description-content');
-            const newsReadMore: HTMLParagraphElement | null = newsClone.querySelector('.news__read-more a');
+            const newsReadMore: HTMLAnchorElement | null = newsClone.querySelector('.news__read-more a');
             if (idx % 2) checkForNull(newsItem).classList.add('alt');
-
-            checkForNull(metaPhoto).style.backgroundImage = `url(${item.urlToImage || 'img/news_placeholder.jpg'})`;
+            console.log(myImage);
+            checkForNull(metaPhoto).style.backgroundImage = `url(${myImage.default})`;
             checkForNull(newsMetaAuthor).textContent = item.author || item.source.name;
             checkForNull(newsMetaDate).textContent = item.publishedAt.slice(0, 10).split('-').reverse().join('-');
             checkForNull(newsDescTitle).textContent = item.title;
