@@ -2,6 +2,7 @@ body {
     color: #fff;
     background: #17181c;
     font-family: sans-serif;
+    overflow-x: hidden;
 }
 
 header {
