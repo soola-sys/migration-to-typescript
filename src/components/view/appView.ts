@@ -13,7 +13,7 @@ export class AppView {
 
     drawNews(data: INewsArticleResponse): void {
         const values: INewsArticles[] = data?.articles ? data?.articles : [];
-        this.news.draw(values);
+        this.news.draw(values.sort((a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()));
     }
 
     drawSources(data: INewsSourcesResponse): void {

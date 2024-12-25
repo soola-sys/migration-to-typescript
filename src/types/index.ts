@@ -29,11 +29,6 @@ export enum responseStatuses {
     Error = 'error',
 }
 
-// export enum EnpointTypes {
-//     Everything = 'everything',
-//     Sources = 'sources',
-// }
-
 export interface INewsArticles {
     source: Sources;
     author: string | null;
